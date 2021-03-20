@@ -1,15 +1,12 @@
 # libae
 A simple event-driven programming library.
-
 ======================================
 How to use?
 ------------------
-
-
-
-=====================================
-How to Build?
+TODO
 ------------------
+How to Build?
+======================================
 ```
 $ git clone https://github.com/aabbdev/libae.git
 $ cd libae
