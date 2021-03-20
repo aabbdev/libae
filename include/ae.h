@@ -94,6 +94,9 @@ namespace ae
     } FiredEvent;
 
     /* State of an event based program */
+    /*
+        TODO: To be work with private/public/..
+     */
     class EventLoop
     {
     public:
@@ -128,6 +131,7 @@ namespace ae
         void* apidata; /* This is used for polling API specific data */
         BeforeSleepProc *beforesleep;
         BeforeSleepProc *aftersleep;
+        char* GetApiName();
     };
 }
 #endif

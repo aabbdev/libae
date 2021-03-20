@@ -42,8 +42,7 @@ workspace "libae"
         kind "StaticLib"
         language "C++"
         files {
-            "src/ae.cc",
-			"src/utils.cc"
+            "src/ae.cc"
         }
         includedirs {
 			"." ,
@@ -56,5 +55,5 @@ workspace "libae"
 	-- * %{prj.name} will be replaced by "ExampleLib" / "App" / "UnitTests"
 	--  * %{cfg.longname} will be replaced by "Debug" or "Release" depending on the configuration
 	-- The path is relative to *this* folder
-	targetdir ("build/%{cfg.longname}")
-	objdir ("build/obj/%{cfg.longname}")
+	targetdir ("build/")
+	objdir ("build/obj/")

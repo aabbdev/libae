@@ -41,25 +41,47 @@
 #include <errno.h>
 
 #include "ae.h"
-#include "utils.h"
 #include "config.h"
 using namespace ae;
 
 /* Include the best multiplexing layer supported by this system.
  * The following should be ordered by performances, descending. */
 #ifdef HAVE_EVPORT
-#include "ae_evport.c"
+#include "ae_evport.cc"
 #else
 #ifdef HAVE_EPOLL
-#include "ae_epoll.c"
+#include "ae_epoll.cc"
 #else
 #ifdef HAVE_KQUEUE
-#include "ae_kqueue.c"
+#include "ae_kqueue.cc"
 #else
-#include "ae_select.c"
+#include "ae_select.cc"
 #endif
 #endif
 #endif
+
+static void InternalGetTime(long *seconds, long *milliseconds)
+{
+    struct timeval tv;
+
+    gettimeofday(&tv, NULL);
+    *seconds = tv.tv_sec;
+    *milliseconds = tv.tv_usec/1000;
+}
+
+static void AddMillisecondsToNow(long long milliseconds, long *sec, long *ms) {
+    long cur_sec, cur_ms, when_sec, when_ms;
+    InternalGetTime(&cur_sec, &cur_ms);
+    when_sec = cur_sec + milliseconds/1000;
+    when_ms = cur_ms + milliseconds%1000;
+    if (when_ms >= 1000) {
+        when_sec ++;
+        when_ms -= 1000;
+    }
+    *sec = when_sec;
+    *ms = when_ms;
+}
+
 
 EventLoop::EventLoop(int setsize)
 {
@@ -91,6 +113,9 @@ EventLoop::~EventLoop()
     aeApiFree(this);
     free(this->events);
     free(this->fired);
+}
+char* EventLoop::GetApiName(){
+    return aeApiName();
 }
 void EventLoop::Start()
 {
