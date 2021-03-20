@@ -5,7 +5,7 @@ How to use?
 ------------------
 TODO
 ------------------
-How to Build?
+How to build?
 ======================================
 ```
 $ git clone https://github.com/aabbdev/libae.git
