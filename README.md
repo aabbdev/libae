@@ -1,7 +1,6 @@
 # libae
 A simple event-driven programming library.
 
-======================================
 How to use?
 ------------------
 TODO
