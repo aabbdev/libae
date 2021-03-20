@@ -42,7 +42,8 @@ workspace "libae"
         kind "StaticLib"
         language "C++"
         files {
-            "src/**"
+            "src/ae.cc",
+			"src/utils.cc"
         }
         includedirs {
 			"." ,

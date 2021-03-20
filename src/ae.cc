@@ -48,15 +48,15 @@ using namespace ae;
 /* Include the best multiplexing layer supported by this system.
  * The following should be ordered by performances, descending. */
 #ifdef HAVE_EVPORT
-#include "ae_evport.internal_c"
+#include "ae_evport.c"
 #else
 #ifdef HAVE_EPOLL
-#include "ae_epoll.internal_c"
+#include "ae_epoll.c"
 #else
 #ifdef HAVE_KQUEUE
-#include "ae_kqueue.internal_c"
+#include "ae_kqueue.c"
 #else
-#include "ae_select.internal_c"
+#include "ae_select.c"
 #endif
 #endif
 #endif
